@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="site-footer-credit">
+    © {{ now.Year }} {{ .Site.Params.author | default .Site.Title }}
+    {{- with .Site.Params.licenseUrl }} ·
+    <a href="{{ . }}">{{ $.Site.Params.licenseLabel | default "CC BY-NC-ND 4.0" }}</a>
+    {{- end }}
+  </div>
+  <div class="site-footer-meta">
+    built with <a href="https://gohugo.io">hugo</a>
+    · theme: <em>axiom</em>
+    {{- with .OutputFormats.Get "rss" }} ·
+    <a href="{{ .RelPermalink }}">rss</a>
+    {{- end }}
+  </div>
+</footer>

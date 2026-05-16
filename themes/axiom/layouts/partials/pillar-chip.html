@@ -1,0 +1,11 @@
+{{- /*
+  Renders a pillar chip linking to the pillar page.
+  Usage: {{ partial "pillar-chip.html" (dict "pillar" .Params.pillar "ctx" .) }}
+*/ -}}
+{{- $pillar := .pillar -}}
+{{- $ctx := .ctx -}}
+{{- if $pillar -}}
+  {{- $slug := $pillar | urlize -}}
+  {{- $url := printf "/pillars/%s/" $slug | relURL -}}
+  <a href="{{ $url }}" class="pillar-chip pillar-{{ $slug }}">{{ $pillar }}</a>
+{{- end -}}

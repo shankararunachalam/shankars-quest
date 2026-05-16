@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      :root {
+        --bg: #faf6ef;
+        --accent: #b85c00;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1118;
+          --accent: #e8954a;
+        }
+      }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="8" fill="var(--bg, #faf6ef)" />
+  <!-- The sam mark: X -->
+  <g stroke="var(--accent, #b85c00)" stroke-width="6" stroke-linecap="round" fill="none">
+    <line x1="20" y1="20" x2="44" y2="44" />
+    <line x1="44" y1="20" x2="20" y2="44" />
+  </g>
+</svg>

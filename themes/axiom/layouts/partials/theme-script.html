@@ -1,0 +1,52 @@
+<script>
+  (function () {
+    var btn = document.querySelector('[data-theme-toggle]');
+    var icon = document.querySelector('[data-theme-icon]');
+    if (!btn) return;
+
+    var STORAGE_KEY = 'axiom-theme';
+    var STATES = ['auto', 'light', 'dark'];
+    var LABELS = { auto: 'auto', light: 'light', dark: 'dark' };
+
+    function getStored() {
+      try { return localStorage.getItem(STORAGE_KEY) || 'auto'; }
+      catch (e) { return 'auto'; }
+    }
+
+    function applyTheme(theme) {
+      var resolved = theme;
+      if (theme === 'auto') {
+        resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', resolved);
+      if (icon) icon.textContent = LABELS[theme] || theme;
+    }
+
+    function setTheme(theme) {
+      try {
+        if (theme === 'auto') localStorage.removeItem(STORAGE_KEY);
+        else localStorage.setItem(STORAGE_KEY, theme);
+      } catch (e) {}
+      applyTheme(theme);
+    }
+
+    // Initialize
+    var current = getStored();
+    applyTheme(current);
+
+    // Cycle on click
+    btn.addEventListener('click', function () {
+      var stored = getStored();
+      var idx = STATES.indexOf(stored);
+      var next = STATES[(idx + 1) % STATES.length];
+      setTheme(next);
+    });
+
+    // Respond to system changes when in auto
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+        if (getStored() === 'auto') applyTheme('auto');
+      });
+    }
+  })();
+</script>

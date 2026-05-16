@@ -1,0 +1,90 @@
+baseURL = "https://shankars.quest/"
+languageCode = "en-gb"
+title = "Shankar's Quest"
+theme = "axiom"
+
+# These let posts in /content/posts/ create taxonomy pages at /pillars/ and /tags/
+[taxonomies]
+  pillar = "pillars"
+  tag = "tags"
+
+# Permalinks: posts live at /year/month/slug/ for permanence
+[permalinks]
+  posts = "/:year/:month/:slug/"
+
+# Markdown rendering — let raw HTML through (you'll occasionally need it)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+
+# Output formats — RSS at root and per-section
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+# Pagination
+[pagination]
+  pagerSize = 12
+
+# ============================================================
+# Theme params — this is where you customize axiom
+# ============================================================
+[params]
+  description = "Notes from a multi-faceted journey: building a Carnatic-aware compositional instrument, an RPG engine, and learning the foundations of LLMs."
+  author = "Shankar Arunachalam"
+  tagline = "notes from a quest"
+  licenseLabel = "CC BY-NC-ND 4.0"
+  licenseUrl = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+
+  # The "currently" line on the homepage — keep this updated
+  currently = "Bringing a Carnatic compositional instrument up on Norns hardware, sketching the core loop of an RPG engine, and working through the foundations of neural networks — roughly in order of momentum."
+
+  # Privacy-light analytics (optional) — emits nothing unless set.
+  # Sign up at goatcounter.com, then use the full count endpoint:
+  # goatcounter = "https://yourcode.goatcounter.com/count"
+
+  # Pillar definitions — these become the cards on the homepage
+  # The `slug` here must match the `pillar` field in your post front matter
+  [[params.pillars]]
+    slug = "music"
+    name = "Music"
+    description = "A programmable hardware instrument for composing Carnatic rhythmic and melodic patterns. Built on Monome Norns + Grid + Plinky."
+
+  [[params.pillars]]
+    slug = "games"
+    name = "Games"
+    description = "An ambitious RPG project. C++ engine, Unreal frontend. Long arc, slow build."
+
+  [[params.pillars]]
+    slug = "llm"
+    name = "LLM Foundations"
+    description = "Working through the foundations: micrograd, makemore, GPT from scratch. The deep stack rather than the surface."
+
+  [[params.pillars]]
+    slug = "journal"
+    name = "Journal"
+    description = "Reflective writing that doesn't fit any single project. Travel, reading, observations."
+
+# ============================================================
+# Menus — appear in the site header
+# ============================================================
+[[menu.main]]
+  name = "posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  name = "pillars"
+  url = "/pillars/"
+  weight = 20
+
+[[menu.main]]
+  name = "about"
+  url = "/about/"
+  weight = 30

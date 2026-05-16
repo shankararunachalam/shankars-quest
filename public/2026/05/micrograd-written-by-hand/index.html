@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-gb" data-theme="auto">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Micrograd, written by hand — Shankar&#39;s Quest</title>
+<meta name="description" content="The first lecture of Karpathy&rsquo;s series and what it teaches you that&rsquo;s not the math." />
+<meta name="author" content="Shankar Arunachalam" />
+
+
+<meta property="og:title" content="Micrograd, written by hand — Shankar&#39;s Quest" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2026/05/micrograd-written-by-hand/" />
+<meta property="og:description" content="The first lecture of Karpathy&rsquo;s series and what it teaches you that&rsquo;s not the math." />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Micrograd, written by hand — Shankar&#39;s Quest" />
+<meta name="twitter:description" content="The first lecture of Karpathy&rsquo;s series and what it teaches you that&rsquo;s not the math." />
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,30..100,0..1&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet" />
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<link rel="stylesheet" href="/css/main.min.eca04cb46523bbe184cb04871f9adcaedfba079ba9a0b96b3ee6b04ca538a448.css" integrity="sha256-7KBMtGUju&#43;GEywSHH5rcrt&#43;6B5upoLlrPuawTKU4pEg=" />
+
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('axiom-theme');
+      var systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (systemPrefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script></head>
+  <body data-pillar="llm">
+    <div class="site"><header class="site-header">
+  <div>
+    <h1 class="site-title">
+      <a href="/">Shankar&#39;s Quest</a>
+    </h1>
+    <p class="site-tagline">notes from a quest</p>
+  </div>
+  <nav class="site-nav" aria-label="primary">
+    <a href="/posts/">posts</a>
+    <a href="/pillars/">pillars</a>
+    <a href="/about/">about</a>
+    <button type="button" class="theme-toggle" aria-label="toggle theme" data-theme-toggle>
+      <span data-theme-icon>auto</span>
+    </button>
+  </nav>
+</header>
+<main class="site-main">
+<article class="post site-narrow">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2026-05-04">4 May 2026</time>
+        <a href="/pillars/llm/" class="pillar-chip pillar-llm">llm</a>
+      <span class="reading-time">3 min read</span>
+    </div>
+    <h1 class="post-title">Micrograd, written by hand</h1>
+    <p class="post-summary">The first lecture of Karpathy&#39;s series and what it teaches you that&#39;s not the math.</p>
+  </header>
+
+  <div class="post-content">
+    <p>Karpathy&rsquo;s &ldquo;Neural Networks: Zero to Hero&rdquo; series starts with micrograd, a 150-line implementation of automatic differentiation. You build it from scratch in a Jupyter notebook over the course of two and a half hours. By the end, you have a tiny library that can train a multi-layer perceptron on a 2D classification problem.</p>
+<p>The math is high-school calculus dressed up: derivatives, the chain rule, gradient descent. None of it is hard. What&rsquo;s hard is the architectural intuition Karpathy is teaching beneath the math.</p>
+<div class="section-break" role="separator" aria-label="Forward and backward" data-label="Forward and backward">○ → ○ → ∇ ← ○ ← ○</div>
+
+<h2 id="the-thing-the-lecture-is-actually-about">The thing the lecture is actually about</h2>
+<p>It&rsquo;s not really about backprop. Backprop is the vehicle. The lecture is about <em>the value object</em> — a node in a computation graph that knows its data, its gradient, its parents, and how to propagate gradient backward through itself.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Value</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">_children</span><span class="o">=</span><span class="p">(),</span> <span class="n">_op</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_backward</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_prev</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_children</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_op</span> <span class="o">=</span> <span class="n">_op</span>
+</span></span></code></pre></div><p>Once you have this, the rest follows mechanically. Add two <code>Value</code> objects, you produce a new <code>Value</code> whose <code>_backward</code> knows that the upstream gradient flows equally to both parents. Multiply two <code>Value</code> objects, the upstream gradient flows scaled by the <em>other</em> operand. tanh, ReLU, exp — same pattern, different <code>_backward</code> closure.</p>
+<p>The architectural move is making the graph <em>explicit</em>. Most ML libraries hide the computation graph behind tensor operations. Karpathy&rsquo;s pedagogical choice is the opposite: make the graph the unit of attention, build everything around it.</p>
+<div class="section-break" role="separator" aria-label="Forward and backward" data-label="Forward and backward">○ → ○ → ∇ ← ○ ← ○</div>
+
+<h2 id="what-this-is-preparing-me-for">What this is preparing me for</h2>
+<p>The follow-on lectures — makemore, GPT-from-scratch — all assume you internalized the graph mental model. Tensors stop being magic boxes; they become <em>batched value objects</em> whose backward passes are vectorized for performance but conceptually identical.</p>
+<p>I wrote the implementation by hand rather than copying. Two and a half hours became four — there&rsquo;s a real difference between watching Karpathy type and typing it yourself, hitting the same shape errors he warns about, watching the loss curve descend on the moons dataset. The body of the work is in your fingers afterward, not just your eyes.</p>
+<div class="section-break" role="separator" aria-label="Forward and backward" data-label="Forward and backward">○ → ○ → ∇ ← ○ ← ○</div>
+
+<h2 id="cross-pillar-note">Cross-pillar note</h2>
+<p>The note + ornament token representation I&rsquo;ve been planning for the music dev v2 melody work has an interesting parallel here. A <code>Value</code> is a piece of data plus a function for how it propagates information backward. A <code>(swara, gamaka)</code> token is a piece of pitch data plus a function for how it realizes into continuous pitch contour at output time. Same architectural shape: data plus a transformation rule, treated as a single unit.</p>
+<p>Probably not a meaningful analogy in any technical sense. But noticing the structural rhyme is itself useful — the kind of thing that happens when you work several thinking-domains in parallel.</p>
+<p>Onto makemore next weekend.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <div class="post-footer-tags">
+      tagged
+      <a href="/tags/karpathy/">karpathy</a>
+      <a href="/tags/neural-networks/">neural-networks</a>
+      <a href="/tags/from-scratch/">from-scratch</a>
+    </div>
+    <div>
+      <a href="/">← home</a>
+    </div>
+  </footer>
+  <nav class="post-nav" aria-label="post navigation">
+    <a class="post-nav-next" href="/2026/05/superbooth-in-fragments/">
+      <span class="post-nav-label">later →</span>
+      <span class="post-nav-title">Superbooth, in fragments</span>
+    </a>
+  </nav>
+</article>
+</main><footer class="site-footer">
+  <div class="site-footer-credit">
+    © 2026 Shankar Arunachalam ·
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+  </div>
+  <div class="site-footer-meta">
+    built with <a href="https://gohugo.io">hugo</a>
+    · theme: <em>axiom</em>
+  </div>
+</footer>
+</div><script>
+  (function () {
+    var btn = document.querySelector('[data-theme-toggle]');
+    var icon = document.querySelector('[data-theme-icon]');
+    if (!btn) return;
+
+    var STORAGE_KEY = 'axiom-theme';
+    var STATES = ['auto', 'light', 'dark'];
+    var LABELS = { auto: 'auto', light: 'light', dark: 'dark' };
+
+    function getStored() {
+      try { return localStorage.getItem(STORAGE_KEY) || 'auto'; }
+      catch (e) { return 'auto'; }
+    }
+
+    function applyTheme(theme) {
+      var resolved = theme;
+      if (theme === 'auto') {
+        resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', resolved);
+      if (icon) icon.textContent = LABELS[theme] || theme;
+    }
+
+    function setTheme(theme) {
+      try {
+        if (theme === 'auto') localStorage.removeItem(STORAGE_KEY);
+        else localStorage.setItem(STORAGE_KEY, theme);
+      } catch (e) {}
+      applyTheme(theme);
+    }
+
+    
+    var current = getStored();
+    applyTheme(current);
+
+    
+    btn.addEventListener('click', function () {
+      var stored = getStored();
+      var idx = STATES.indexOf(stored);
+      var next = STATES[(idx + 1) % STATES.length];
+      setTheme(next);
+    });
+
+    
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+        if (getStored() === 'auto') applyTheme('auto');
+      });
+    }
+  })();
+</script>
+</body>
+</html>

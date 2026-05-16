@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Carnatic on Shankar&#39;s Quest</title>
+    <link>http://localhost:1313/tags/carnatic/</link>
+    <description>Recent content in Carnatic on Shankar&#39;s Quest</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Tue, 12 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/carnatic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Norns in hand: first power-on</title>
+      <link>http://localhost:1313/2026/05/norns-in-hand-first-power-on/</link>
+      <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/2026/05/norns-in-hand-first-power-on/</guid>
+      <description>Three years of planning compressed into the moment of pressing the boot button. Notes from Phase 0 of the music dev journey.</description>
+    </item>
+  </channel>
+</rss>

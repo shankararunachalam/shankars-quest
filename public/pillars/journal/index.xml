@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Journal on Shankar&#39;s Quest</title>
+    <link>http://localhost:1313/pillars/journal/</link>
+    <description>Recent content in Journal on Shankar&#39;s Quest</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 09 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/pillars/journal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Superbooth, in fragments</title>
+      <link>http://localhost:1313/2026/05/superbooth-in-fragments/</link>
+      <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/2026/05/superbooth-in-fragments/</guid>
+      <description>Three days at FEZ Berlin among synth makers. What I learned, what I bought, what I watched other people fall in love with.</description>
+    </item>
+  </channel>
+</rss>

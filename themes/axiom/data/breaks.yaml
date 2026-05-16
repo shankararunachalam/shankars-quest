@@ -1,0 +1,68 @@
+# data/breaks.yaml
+#
+# Section-break vocabularies for the axiom theme.
+# The {{< break >}} shortcode resolves a two-level lookup here:
+#   breaks[pillar].variants[variant]
+#
+#   pillar  - taken from a post's `pillar` front-matter field;
+#             falls back to "journal" when unset or unknown.
+#   variant - the optional first argument to {{< break >}};
+#             falls back to the pillar's `default` when omitted or unknown.
+#
+# Every row obeys one backbone: a single glyph per position, rendered
+# centred, monospace and light-grey by the .section-break CSS class.
+# Row length may vary by variant; the glyph discipline is the constant.
+
+music:
+  default: adi
+  # Talas. adi and rupaka ship as the starting set; further talas
+  # slot in here in the same shape.
+  variants:
+    adi:
+      glyphs: "X · · · | O · | O ·"
+      label: "Adi tala"
+    rupaka:
+      glyphs: "O · | X · · ·"
+      label: "Rupaka tala"
+
+games:
+  default: quest
+  # Roguelike map archetypes.
+  variants:
+    corridor:
+      glyphs: "# · · @ · · · · #"
+      label: "Corridor — a roguelike map slice"
+    quest:
+      glyphs: "· · @ · · D · · $ · >"
+      label: "Quest — a roguelike map slice"
+    lair:
+      glyphs: "· · · @ · · · D · ·"
+      label: "Lair — a roguelike map slice"
+    town:
+      glyphs: "· · + · @ · · + · ·"
+      label: "Town — a roguelike map slice"
+
+llm:
+  default: cycle
+  # The passes of a computation graph.
+  variants:
+    forward:
+      glyphs: "○ → ○ → ○ → ●"
+      label: "The forward pass"
+    backward:
+      glyphs: "∇ ← ○ ← ○ ← ○"
+      label: "The backward pass"
+    cycle:
+      glyphs: "○ → ○ → ∇ ← ○ ← ○"
+      label: "Forward and backward"
+
+journal:
+  default: plain
+  # The neutral break — the shared atom, nothing pillar-specific.
+  variants:
+    plain:
+      glyphs: "·   ·   ·"
+      label: "Section break"
+    dinkus:
+      glyphs: "*   *   *"
+      label: "Section break"

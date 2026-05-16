@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="error-page site-narrow">
+  <h1>404</h1>
+  <p style="font-family: var(--serif-display); font-style: italic; font-size: var(--scale-1); color: var(--ink-soft);">
+    This path doesn't lead anywhere.
+  </p>
+  <div class="section-break" role="separator" aria-label="Section break" data-label="Section break">·   ·   ·</div>
+  <p style="margin-top: var(--avartana);">
+    <a href="{{ .Site.Home.RelPermalink }}">← back home</a>
+  </p>
+</div>
+{{ end }}

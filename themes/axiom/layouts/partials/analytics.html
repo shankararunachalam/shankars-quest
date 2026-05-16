@@ -1,0 +1,16 @@
+{{- /*
+  analytics.html — privacy-light visit counting via GoatCounter.
+
+  Emits nothing at all unless `goatcounter` is set under [params] in
+  the site config. The value is the full GoatCounter count endpoint:
+
+    [params]
+      goatcounter = "https://yourcode.goatcounter.com/count"
+
+  GoatCounter sets no cookies and collects no personal data, so no
+  consent banner is required. Swap in another provider here if you
+  prefer — this partial is the single place analytics is wired in.
+*/ -}}
+{{- with .Site.Params.goatcounter -}}
+<script data-goatcounter="{{ . }}" async src="//gc.zgo.at/count.js"></script>
+{{- end -}}

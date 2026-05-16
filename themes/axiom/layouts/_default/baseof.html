@@ -1,0 +1,23 @@
+{{- $lang := .Site.LanguageCode | default "en" -}}
+{{- $pillar := "" -}}
+{{- if .IsPage -}}
+  {{- $pillar = .Params.pillars | default "" -}}
+{{- else if eq .Kind "term" -}}
+  {{- if eq .Data.Plural "pillars" -}}{{- $pillar = .Title | lower -}}{{- end -}}
+{{- end -}}
+<!DOCTYPE html>
+<html lang="{{ $lang }}" data-theme="auto">
+  <head>
+    {{- partial "head.html" . -}}
+  </head>
+  <body{{ with $pillar }} data-pillar="{{ . }}"{{ end }}>
+    <div class="site">
+      {{- partial "header.html" . -}}
+      <main class="site-main">
+        {{- block "main" . }}{{ end -}}
+      </main>
+      {{- partial "footer.html" . -}}
+    </div>
+    {{- partial "theme-script.html" . -}}
+  </body>
+</html>

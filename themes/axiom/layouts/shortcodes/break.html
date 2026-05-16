@@ -1,0 +1,26 @@
+{{- /*
+  break.html — the axiom theme's pillar-adaptive section break.
+
+  Resolves a two-level lookup against data/breaks.yaml:
+    pillar  - the post's `pillar` front-matter field;
+              falls back to "journal" when unset or unknown.
+    variant - the optional first argument;
+              falls back to the pillar's default when omitted,
+              and when an unknown variant is passed.
+
+  Call it as:
+    break              -> the pillar's default variant
+    break "rupaka"     -> a named variant
+*/ -}}
+{{- $breaks := site.Data.breaks -}}
+{{- $pillar := .Page.Params.pillars | default "journal" -}}
+{{- $family := index $breaks $pillar -}}
+{{- if not $family -}}
+  {{- $family = index $breaks "journal" -}}
+{{- end -}}
+{{- $variant := or (.Get 0) $family.default -}}
+{{- $entry := index $family.variants $variant -}}
+{{- if not $entry -}}
+  {{- $entry = index $family.variants $family.default -}}
+{{- end -}}
+<div class="section-break" role="separator" aria-label="{{ $entry.label }}" data-label="{{ $entry.label }}">{{ $entry.glyphs }}</div>

@@ -1,0 +1,12 @@
+name = "axiom"
+license = "MIT"
+licenselink = "https://github.com/shankararunachalam/hugo-theme-axiom/blob/main/LICENSE"
+description = "A quiet editorial Hugo theme for personal blogs that span several project threads. Each post belongs to a pillar; a pillar-adaptive section break and a per-pillar accent colour give the threads distinct identities without fragmenting the design."
+homepage = "https://github.com/shankararunachalam/hugo-theme-axiom"
+tags = ["blog", "editorial", "minimal", "personal", "multi-pillar"]
+features = ["light/dark mode", "pillar categorization", "pillar-adaptive section breaks", "reading time", "rss"]
+min_version = "0.140.0"
+
+[author]
+  name = "Shankar Arunachalam"
+  homepage = "https://shankararunachalam.com"

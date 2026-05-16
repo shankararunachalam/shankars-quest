@@ -1,0 +1,55 @@
+{{ define "main" }}
+<section class="home-intro site-narrow">
+  {{- with .Title }}
+  <h1>{{ . }}</h1>
+  {{- end }}
+  {{- with .Content }}
+  {{ . }}
+  {{- end }}
+  {{- with .Site.Params.currently }}
+  <div class="home-currently">
+    <span class="label">Currently</span>
+    {{ . | markdownify }}
+  </div>
+  {{- end }}
+</section>
+
+{{- with .Site.Params.pillars }}
+<section class="pillars-grid">
+  {{- range . -}}
+    {{- $slug := .slug -}}
+    {{- $posts := where site.RegularPages "Params.pillars" $slug -}}
+    {{- $has := gt (len $posts) 0 -}}
+    {{- $url := printf "/pillars/%s/" $slug | relURL -}}
+    <a class="pillar-card" data-pillar="{{ $slug }}"{{ if $has }} href="{{ $url }}"{{ end }}>
+      <h2 class="pillar-card-title">{{ .name }}</h2>
+      <p class="pillar-card-description">{{ .description }}</p>
+      {{- with index ($posts.ByDate.Reverse) 0 -}}
+      <div class="pillar-card-latest">
+        <span class="label">Latest</span>
+        {{ .Title }} · <em>{{ .Date.Format "Jan 2006" }}</em>
+      </div>
+      {{- end -}}
+    </a>
+  {{- end -}}
+</section>
+{{- end }}
+
+<section class="site-narrow">
+  <h2 class="section-heading">
+    <span class="section-heading-eyebrow">Recent</span>
+    All posts
+  </h2>
+  <ul class="post-list">
+    {{- $recent := first 8 (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+    {{- range $recent }}
+      {{ partial "post-card.html" . }}
+    {{- end }}
+  </ul>
+  {{- if gt (len (where site.RegularPages "Section" "posts")) 8 }}
+  <p style="text-align: center; margin-top: var(--avartana); font-style: italic; color: var(--ink-faint);">
+    <a href="{{ "/posts/" | relURL }}">all posts →</a>
+  </p>
+  {{- end }}
+</section>
+{{ end }}

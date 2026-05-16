@@ -1,0 +1,16 @@
+{{- /*
+  Renders a post in list view.
+  Usage: {{ partial "post-card.html" . }}
+*/ -}}
+<li class="post-list-item">
+  <div class="post-list-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+    {{- with .Params.pillars }}
+      {{ partial "pillar-chip.html" (dict "pillar" . "ctx" $) }}
+    {{- end }}
+  </div>
+  <h2 class="post-list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{- with .Params.summary | default .Summary }}
+  <p class="post-list-summary">{{ . | plainify | truncate 240 }}</p>
+  {{- end }}
+</li>

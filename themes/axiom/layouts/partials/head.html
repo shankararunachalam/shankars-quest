@@ -1,0 +1,62 @@
+{{- $title := .Title -}}
+{{- if .IsHome -}}
+  {{- $title = .Site.Title -}}
+{{- else -}}
+  {{- $title = printf "%s — %s" .Title .Site.Title -}}
+{{- end -}}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{ $title }}</title>
+{{- with .Description | default .Summary | default .Site.Params.description }}
+<meta name="description" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.author }}
+<meta name="author" content="{{ . }}" />
+{{- end }}
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{- with .Description | default .Summary | default .Site.Params.description }}
+<meta property="og:description" content="{{ . }}" />
+{{- end }}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ $title }}" />
+{{- with .Description | default .Summary | default .Site.Params.description }}
+<meta name="twitter:description" content="{{ . }}" />
+{{- end }}
+
+<!-- RSS -->
+{{- range .AlternativeOutputFormats -}}
+  {{ printf `<link rel=%q type=%q href=%q title=%q />` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+{{ end -}}
+
+<!-- Fonts: Fraunces (display), EB Garamond (body), JetBrains Mono (code) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,30..100,0..1&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}" />
+
+<!-- CSS -->
+{{- $main := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}" />
+
+<!-- Inline theme initializer to avoid flash -->
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('axiom-theme');
+      var systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (systemPrefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+
+{{- /* analytics — emits nothing unless params.goatcounter is set */ -}}
+{{- partial "analytics.html" . -}}
