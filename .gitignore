@@ -1,0 +1,4 @@
+# Hugo build artifacts — rebuilt by GitHub Actions on every push.
+public/
+resources/
+.hugo_build.lock
