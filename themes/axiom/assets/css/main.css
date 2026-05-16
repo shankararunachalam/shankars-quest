@@ -705,6 +705,20 @@ th {
 
 /* ---------- post list ---------- */
 
+/* listing pages — /posts/, /trails/, /trails/<name>/, /tags/, /tags/<name>/.
+   Provides the page-top breathing room that single posts get from .post,
+   and tones the H1 down a step (scale-3 vs scale-4) so the page title
+   doesn't dwarf the list items below it. */
+.listing {
+  padding-top: calc(var(--akshara) * 1.5);
+  padding-bottom: calc(var(--akshara) * 2);
+}
+
+.listing .post-title {
+  font-size: var(--scale-3);
+  font-variation-settings: "opsz" 36;
+}
+
 .section-heading {
   font-family: var(--serif-display);
   font-size: var(--scale-2);
