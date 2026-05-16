@@ -1,0 +1,4 @@
+# Normalize all text files to LF in the repo and in the working copy.
+# Overrides core.autocrlf=true so Git no longer converts on checkout
+# (the source of the "LF will be replaced by CRLF" warnings).
+* text=auto eol=lf
