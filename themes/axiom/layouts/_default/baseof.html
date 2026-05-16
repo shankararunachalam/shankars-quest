@@ -1,16 +1,16 @@
 {{- $lang := .Site.LanguageCode | default "en" -}}
-{{- $pillar := "" -}}
+{{- $trail := "" -}}
 {{- if .IsPage -}}
-  {{- $pillar = .Params.pillars | default "" -}}
+  {{- $trail = .Params.trails | default "" -}}
 {{- else if eq .Kind "term" -}}
-  {{- if eq .Data.Plural "pillars" -}}{{- $pillar = .Title | lower -}}{{- end -}}
+  {{- if eq .Data.Plural "trails" -}}{{- $trail = .Title | lower -}}{{- end -}}
 {{- end -}}
 <!DOCTYPE html>
 <html lang="{{ $lang }}" data-theme="auto">
   <head>
     {{- partial "head.html" . -}}
   </head>
-  <body{{ with $pillar }} data-pillar="{{ . }}"{{ end }}>
+  <body{{ with $trail }} data-trail="{{ . }}"{{ end }}>
     <div class="site">
       {{- partial "header.html" . -}}
       <main class="site-main">

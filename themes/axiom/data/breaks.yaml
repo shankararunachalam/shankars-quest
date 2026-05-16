@@ -2,12 +2,12 @@
 #
 # Section-break vocabularies for the axiom theme.
 # The {{< break >}} shortcode resolves a two-level lookup here:
-#   breaks[pillar].variants[variant]
+#   breaks[trail].variants[variant]
 #
-#   pillar  - taken from a post's `pillar` front-matter field;
+#   trail  - taken from a post's `trail` front-matter field;
 #             falls back to "journal" when unset or unknown.
 #   variant - the optional first argument to {{< break >}};
-#             falls back to the pillar's `default` when omitted or unknown.
+#             falls back to the trail's `default` when omitted or unknown.
 #
 # Every row obeys one backbone: a single glyph per position, rendered
 # centred, monospace and light-grey by the .section-break CSS class.
@@ -25,7 +25,7 @@ music:
       glyphs: "O · | X · · ·"
       label: "Rupaka tala"
 
-games:
+gaming:
   default: quest
   # Roguelike map archetypes.
   variants:
@@ -58,7 +58,7 @@ llm:
 
 journal:
   default: plain
-  # The neutral break — the shared atom, nothing pillar-specific.
+  # The neutral break — the shared atom, nothing trail-specific.
   variants:
     plain:
       glyphs: "·   ·   ·"

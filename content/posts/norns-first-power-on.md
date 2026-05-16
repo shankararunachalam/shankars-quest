@@ -1,7 +1,7 @@
 ---
 title: "Norns in hand: first power-on"
 date: 2026-05-12
-pillars: "music"
+trails: "music"
 tags: ["norns", "hardware", "carnatic"]
 summary: "Three years of planning compressed into the moment of pressing the boot button. Notes from Phase 0 of the music dev journey."
 ---

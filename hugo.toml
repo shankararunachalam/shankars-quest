@@ -3,9 +3,9 @@ languageCode = "en-gb"
 title = "Shankar's Quest"
 theme = "axiom"
 
-# These let posts in /content/posts/ create taxonomy pages at /pillars/ and /tags/
+# These let posts in /content/posts/ create taxonomy pages at /trails/ and /tags/
 [taxonomies]
-  pillar = "pillars"
+  trail = "trails"
   tag = "tags"
 
 # Permalinks: posts live at /year/month/slug/ for permanence
@@ -49,26 +49,26 @@ theme = "axiom"
   # Sign up at goatcounter.com, then use the full count endpoint:
   # goatcounter = "https://yourcode.goatcounter.com/count"
 
-  # Pillar definitions — these become the cards on the homepage
-  # The `slug` here must match the `pillar` field in your post front matter
-  [[params.pillars]]
+  # Trail definitions — these become the cards on the homepage
+  # The `slug` here must match the `trails` field in your post front matter
+  [[params.trails]]
     slug = "music"
-    name = "Music"
+    name = "music"
     description = "A programmable hardware instrument for composing Carnatic rhythmic and melodic patterns. Built on Monome Norns + Grid + Plinky."
 
-  [[params.pillars]]
-    slug = "games"
-    name = "Games"
+  [[params.trails]]
+    slug = "gaming"
+    name = "gaming"
     description = "An ambitious RPG project. C++ engine, Unreal frontend. Long arc, slow build."
 
-  [[params.pillars]]
+  [[params.trails]]
     slug = "llm"
-    name = "LLM Foundations"
+    name = "llm"
     description = "Working through the foundations: micrograd, makemore, GPT from scratch. The deep stack rather than the surface."
 
-  [[params.pillars]]
+  [[params.trails]]
     slug = "journal"
-    name = "Journal"
+    name = "journal"
     description = "Reflective writing that doesn't fit any single project. Travel, reading, observations."
 
 # ============================================================
@@ -80,8 +80,8 @@ theme = "axiom"
   weight = 10
 
 [[menu.main]]
-  name = "pillars"
-  url = "/pillars/"
+  name = "trails"
+  url = "/trails/"
   weight = 20
 
 [[menu.main]]

@@ -1,7 +1,7 @@
 ---
 title: "Micrograd, written by hand"
 date: 2026-05-04
-pillars: "llm"
+trails: "llm"
 tags: ["karpathy", "neural-networks", "from-scratch"]
 summary: "The first lecture of Karpathy's series and what it teaches you that's not the math."
 ---
@@ -40,7 +40,7 @@ I wrote the implementation by hand rather than copying. Two and a half hours bec
 
 {{< break >}}
 
-## Cross-pillar note
+## Cross-trail note
 
 The note + ornament token representation I've been planning for the music dev v2 melody work has an interesting parallel here. A `Value` is a piece of data plus a function for how it propagates information backward. A `(swara, gamaka)` token is a piece of pitch data plus a function for how it realizes into continuous pitch contour at output time. Same architectural shape: data plus a transformation rule, treated as a single unit.
 

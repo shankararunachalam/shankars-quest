@@ -1,7 +1,7 @@
-/* axiom — a quiet editorial Hugo theme for multi-pillar journals
+/* axiom — a quiet editorial Hugo theme for multi-trail journals
    ============================================================
    Vertical rhythm built on a single base unit (--akshara, 1.5rem).
-   One contextual accent: set per pillar, used structurally.
+   One contextual accent: set per trail, used structurally.
 */
 
 /* ---------- design tokens ---------- */
@@ -15,17 +15,17 @@
   --ink-faint: #8c8a82;
   --rule: #e4e2dc;
 
-  /* pillar accents — light mode (restrained); four equal-weight peers */
-  --pillar-music: #4b45a6;   /* indigo */
-  --pillar-games: #0c7689;   /* cyan   */
-  --pillar-llm: #9a3354;     /* wine   */
-  --pillar-journal: #77756f; /* grey   */
+  /* trail accents — light mode (restrained); four equal-weight peers */
+  --trail-music: #4b45a6;   /* indigo */
+  --trail-gaming: #0c7689;   /* cyan   */
+  --trail-llm: #9a3354;     /* wine   */
+  --trail-journal: #77756f; /* grey   */
 
-  /* the contextual accent — defaults to the neutral pillar (journal),
-     and is overridden per page by the [data-pillar] rules below.
-     soft/faint derive from it, so they follow whichever pillar — and
+  /* the contextual accent — defaults to the neutral trail (journal),
+     and is overridden per page by the [data-trail] rules below.
+     soft/faint derive from it, so they follow whichever trail — and
      whichever colour mode — is in scope, with no extra declarations. */
-  --accent: var(--pillar-journal);
+  --accent: var(--trail-journal);
   --accent-soft: color-mix(in oklab, var(--accent) 60%, var(--bg));
   --accent-faint: color-mix(in oklab, var(--accent) 15%, var(--bg));
 
@@ -36,16 +36,22 @@
   --syn-number: #92633a;
   --syn-name: #3f5a87;
 
-  /* typography */
-  --serif-display: 'Fraunces', 'Georgia', 'Times New Roman', serif;
-  --serif-body: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
+  /* typography — Source Serif 4 as a single family, two roles
+     (display + body), with optical sizes doing the work that two
+     families used to do. JetBrains Mono for code and section breaks. */
+  --serif-display: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
+  --serif-body: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* rhythm — akshara is the base unit */
   --akshara: 1.5rem;
   --avartana: calc(var(--akshara) * 4);
+  /* single column width across the site, sized for prose (~66ch).
+     Both tokens are kept for now in case a wider variant becomes useful;
+     they intentionally hold the same value while the site reads as one
+     editorial column. */
   --content-width: 38rem;
-  --content-width-wide: 56rem;
+  --content-width-wide: 38rem;
 
   /* heading scale (trikalam: vilamba/madhya/durita = 1:2:4) */
   /* derived: 1, sqrt(2), 2, 2*sqrt(2), 4 */
@@ -76,11 +82,11 @@
     --ink-faint: #7b7970;
     --rule: #34332f;
 
-    /* pillar accents — dark mode (a quiet synthwave glow) */
-    --pillar-music: #7e6bf2;   /* indigo */
-    --pillar-games: #34e0dc;   /* cyan   */
-    --pillar-llm: #e85f98;     /* wine   */
-    --pillar-journal: #9e9c92; /* grey   */
+    /* trail accents — dark mode (a quiet synthwave glow) */
+    --trail-music: #7e6bf2;   /* indigo */
+    --trail-gaming: #34e0dc;   /* cyan   */
+    --trail-llm: #e85f98;     /* wine   */
+    --trail-journal: #9e9c92; /* grey   */
 
     /* syntax highlighting — dark mode */
     --syn-comment: #7b7970;
@@ -99,10 +105,10 @@
   --ink-soft: #a5a39a;
   --ink-faint: #7b7970;
   --rule: #34332f;
-  --pillar-music: #7e6bf2;
-  --pillar-games: #34e0dc;
-  --pillar-llm: #e85f98;
-  --pillar-journal: #9e9c92;
+  --trail-music: #7e6bf2;
+  --trail-gaming: #34e0dc;
+  --trail-llm: #e85f98;
+  --trail-journal: #9e9c92;
   --syn-comment: #7b7970;
   --syn-keyword: #d39ab0;
   --syn-string: #9cbf9e;
@@ -117,10 +123,10 @@
   --ink-soft: #56544e;
   --ink-faint: #8c8a82;
   --rule: #e4e2dc;
-  --pillar-music: #4b45a6;
-  --pillar-games: #0c7689;
-  --pillar-llm: #9a3354;
-  --pillar-journal: #77756f;
+  --trail-music: #4b45a6;
+  --trail-gaming: #0c7689;
+  --trail-llm: #9a3354;
+  --trail-journal: #77756f;
   --syn-comment: #a09d92;
   --syn-keyword: #8a4a63;
   --syn-string: #5c7355;
@@ -128,13 +134,13 @@
   --syn-name: #3f5a87;
 }
 
-/* contextual accent — the page's pillar selects the accent hue.
-   data-pillar is set on <body> in baseof.html; on pages with no
-   pillar (home, archives) the neutral default above stands. */
-[data-pillar="music"]   { --accent: var(--pillar-music); }
-[data-pillar="games"]   { --accent: var(--pillar-games); }
-[data-pillar="llm"]     { --accent: var(--pillar-llm); }
-[data-pillar="journal"] { --accent: var(--pillar-journal); }
+/* contextual accent — the page's trail selects the accent hue.
+   data-trail is set on <body> in baseof.html; on pages with no
+   trail (home, archives) the neutral default above stands. */
+[data-trail="music"]   { --accent: var(--trail-music); }
+[data-trail="gaming"]   { --accent: var(--trail-gaming); }
+[data-trail="llm"]     { --accent: var(--trail-llm); }
+[data-trail="journal"] { --accent: var(--trail-journal); }
 
 /* ---------- reset & base ---------- */
 
@@ -182,27 +188,27 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.015em;
   margin: calc(var(--akshara) * 1.5) 0 var(--akshara);
   color: var(--ink);
-  /* Fraunces variable axes if available */
-  font-variation-settings: "opsz" 30, "SOFT" 30, "WONK" 0;
+  /* Source Serif 4 optical-size axis (8..60) */
+  font-variation-settings: "opsz" 24;
 }
 
 h1 {
   font-size: var(--scale-4);
   line-height: var(--leading-tight);
-  font-variation-settings: "opsz" 90, "SOFT" 50, "WONK" 0;
+  font-variation-settings: "opsz" 48;
   margin-top: 0;
 }
 
 h2 {
   font-size: var(--scale-3);
-  font-variation-settings: "opsz" 60, "SOFT" 40, "WONK" 0;
+  font-variation-settings: "opsz" 36;
 }
 
 h3 {
   font-size: var(--scale-2);
   font-style: italic;
   color: var(--ink-soft);
-  font-variation-settings: "opsz" 30, "SOFT" 30, "WONK" 0;
+  font-variation-settings: "opsz" 24;
 }
 
 h4 {
@@ -411,7 +417,7 @@ th {
   font-weight: 500;
   letter-spacing: -0.015em;
   margin: 0;
-  font-variation-settings: "opsz" 50, "SOFT" 40, "WONK" 1;
+  font-variation-settings: "opsz" 32;
 }
 
 .site-title a {
@@ -470,8 +476,8 @@ th {
 }
 
 /* ---------- the section break — the signature device ----------
-   Rendered by the {{< break >}} shortcode. Pillar-adaptive: the
-   glyph vocabulary shifts per pillar, but every break is the same
+   Rendered by the {{< break >}} shortcode. Trail-adaptive: the
+   glyph vocabulary shifts per trail, but every break is the same
    centred, monospace, light-grey row. On hover it reveals the
    variant's name — the data-label attribute — as a quiet caption. */
 
@@ -511,29 +517,29 @@ th {
   opacity: 1;
 }
 
-/* ---------- pillar chips ---------- */
+/* ---------- trail chips ---------- */
 
-.pillar-chip {
+.trail-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
   font-family: var(--serif-display);
   font-style: italic;
   font-size: 0.85rem;
-  color: var(--pillar);
+  color: var(--trail);
   text-decoration: none;
   padding: 0.15em 0;
   border-bottom: 1px dotted currentColor;
   letter-spacing: 0.02em;
   transition: opacity var(--tx-fast);
-  --pillar: var(--ink-soft);
+  --trail: var(--ink-soft);
 }
 
-.pillar-chip:hover {
+.trail-chip:hover {
   opacity: 0.7;
 }
 
-.pillar-chip::before {
+.trail-chip::before {
   content: '';
   display: inline-block;
   width: 0.45em;
@@ -543,23 +549,23 @@ th {
   flex-shrink: 0;
 }
 
-.pillar-chip.pillar-music { --pillar: var(--pillar-music); }
-.pillar-chip.pillar-games { --pillar: var(--pillar-games); }
-.pillar-chip.pillar-llm { --pillar: var(--pillar-llm); }
-.pillar-chip.pillar-journal { --pillar: var(--pillar-journal); }
+.trail-chip.trail-music { --trail: var(--trail-music); }
+.trail-chip.trail-gaming { --trail: var(--trail-gaming); }
+.trail-chip.trail-llm { --trail: var(--trail-llm); }
+.trail-chip.trail-journal { --trail: var(--trail-journal); }
 
 /* ---------- home page ---------- */
 
 .home-intro {
   max-width: var(--content-width);
-  margin: 0 auto var(--avartana);
-  padding: var(--avartana) 0;
+  margin: 0 auto;
+  padding: calc(var(--akshara) * 1.5) 0 0;
 }
 
 .home-intro h1 {
   font-size: var(--scale-4);
   margin-bottom: var(--akshara);
-  font-variation-settings: "opsz" 100, "SOFT" 60, "WONK" 1;
+  font-variation-settings: "opsz" 60;
 }
 
 .home-intro .lead {
@@ -569,7 +575,7 @@ th {
 }
 
 .home-currently {
-  margin-top: calc(var(--akshara) * 1.5);
+  margin-top: calc(var(--akshara) * 2);
   padding: var(--akshara) 0 0;
   border-top: 1px solid var(--rule);
   font-family: var(--serif-display);
@@ -587,14 +593,21 @@ th {
   margin-bottom: 0.3em;
 }
 
-.pillars-grid {
+.trails-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  /* 2x2 at the editorial column width; stacks to a single column on
+     narrow viewports. */
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--akshara);
-  margin: var(--avartana) 0;
+  /* matches the section rhythm used by .home-currently and
+     .section-heading — a consistent 2*akshara between sections. */
+  margin: calc(var(--akshara) * 2) auto 0;
+}
+@media (max-width: 28rem) {
+  .trails-grid { grid-template-columns: 1fr; }
 }
 
-.pillar-card {
+.trail-card {
   padding: var(--akshara);
   background: var(--bg-elevated);
   border: 1px solid var(--rule);
@@ -602,55 +615,59 @@ th {
   text-decoration: none;
   color: inherit;
   transition: border-color var(--tx-med), transform var(--tx-med);
-  display: block;
+  /* flex column so .trail-card-latest's margin-top:auto pins it to the
+     bottom; min-height keeps cards consistent across the 2x2 grid. */
+  display: flex;
+  flex-direction: column;
+  min-height: calc(var(--akshara) * 7);
   position: relative;
   overflow: hidden;
 }
 
-.pillar-card::before {
+.trail-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--pillar-color, var(--accent));
+  background: var(--trail-color, var(--accent));
 }
 
-.pillar-card:hover {
-  border-color: var(--pillar-color, var(--accent));
+.trail-card:hover {
+  border-color: var(--trail-color, var(--accent));
   transform: translateY(-2px);
 }
 
-/* a pillar with no posts yet renders as a non-link card (it has no href) */
-.pillar-card:not([href]) { cursor: default; }
-.pillar-card:not([href]):hover {
+/* a trail with no posts yet renders as a non-link card (it has no href) */
+.trail-card:not([href]) { cursor: default; }
+.trail-card:not([href]):hover {
   transform: none;
   border-color: var(--rule);
 }
 
-.pillar-card[data-pillar="music"] { --pillar-color: var(--pillar-music); }
-.pillar-card[data-pillar="games"] { --pillar-color: var(--pillar-games); }
-.pillar-card[data-pillar="llm"] { --pillar-color: var(--pillar-llm); }
-.pillar-card[data-pillar="journal"] { --pillar-color: var(--pillar-journal); }
+.trail-card[data-trail="music"] { --trail-color: var(--trail-music); }
+.trail-card[data-trail="gaming"] { --trail-color: var(--trail-gaming); }
+.trail-card[data-trail="llm"] { --trail-color: var(--trail-llm); }
+.trail-card[data-trail="journal"] { --trail-color: var(--trail-journal); }
 
-.pillar-card-title {
+.trail-card-title {
   font-family: var(--serif-display);
   font-size: var(--scale-1);
   font-weight: 500;
   margin: 0 0 0.4em;
-  color: var(--pillar-color);
-  font-variation-settings: "opsz" 24, "SOFT" 30, "WONK" 0;
+  color: var(--trail-color);
+  font-variation-settings: "opsz" 18;
 }
 
-.pillar-card-description {
+.trail-card-description {
   font-size: 0.92rem;
   color: var(--ink-soft);
   line-height: var(--leading-snug);
   margin: 0 0 var(--akshara);
 }
 
-.pillar-card-latest {
+.trail-card-latest {
   font-family: var(--serif-display);
   font-style: italic;
   font-size: 0.85rem;
@@ -658,9 +675,11 @@ th {
   border-top: 1px solid var(--rule);
   padding-top: 0.7em;
   margin-top: auto;
+  /* fixed-ish footer height so cards align even when a trail has no posts. */
+  min-height: calc(var(--akshara) * 2.5);
 }
 
-.pillar-card-latest .label {
+.trail-card-latest .label {
   display: block;
   font-style: normal;
   font-size: 0.75rem;
@@ -670,14 +689,27 @@ th {
   margin-bottom: 0.2em;
 }
 
+.trail-card-latest .latest-line {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trail-card-latest .latest-empty {
+  display: block;
+  color: var(--ink-faint);
+  letter-spacing: 0.32em;
+}
+
 /* ---------- post list ---------- */
 
 .section-heading {
   font-family: var(--serif-display);
   font-size: var(--scale-2);
   font-weight: 500;
-  margin: var(--avartana) 0 var(--akshara);
-  font-variation-settings: "opsz" 40, "SOFT" 30, "WONK" 0;
+  margin: calc(var(--akshara) * 2) 0 var(--akshara);
+  font-variation-settings: "opsz" 28;
 }
 
 .section-heading-eyebrow {
@@ -728,7 +760,7 @@ th {
   font-weight: 500;
   margin: 0 0 0.4em;
   line-height: var(--leading-snug);
-  font-variation-settings: "opsz" 30, "SOFT" 30, "WONK" 0;
+  font-variation-settings: "opsz" 24;
 }
 
 .post-list-title a {
@@ -789,7 +821,7 @@ th {
 
 .post-title {
   font-size: var(--scale-4);
-  font-variation-settings: "opsz" 100, "SOFT" 60, "WONK" 1;
+  font-variation-settings: "opsz" 60;
   margin: 0 0 var(--akshara);
 }
 
@@ -799,7 +831,7 @@ th {
   font-size: var(--scale-1);
   color: var(--ink-soft);
   margin: 0;
-  font-variation-settings: "opsz" 24, "SOFT" 30, "WONK" 0;
+  font-variation-settings: "opsz" 20;
 }
 
 .post-content {
@@ -889,15 +921,17 @@ th {
   font-family: var(--serif-display);
   font-weight: 500;
   color: var(--ink);
-  font-variation-settings: "opsz" 24, "SOFT" 30, "WONK" 0;
+  font-variation-settings: "opsz" 18;
 }
 
 /* ---------- footer ---------- */
 
 .site-footer {
-  padding: var(--avartana) var(--akshara);
+  /* tight top padding so the credit line sits right under the rule;
+     a touch more at the bottom for breathing room at the page edge. */
+  padding: var(--akshara) var(--akshara) calc(var(--akshara) * 2);
   max-width: var(--content-width-wide);
-  margin: var(--avartana) auto 0;
+  margin: calc(var(--akshara) * 2) auto 0;
   width: 100%;
   border-top: 1px solid var(--rule);
   font-family: var(--serif-display);
@@ -932,7 +966,7 @@ th {
 
 .error-page h1 {
   font-size: var(--scale-5);
-  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-variation-settings: "opsz" 60;
   margin-bottom: var(--akshara);
 }
 

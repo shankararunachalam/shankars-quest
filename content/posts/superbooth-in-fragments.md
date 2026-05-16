@@ -1,7 +1,7 @@
 ---
 title: "Superbooth, in fragments"
 date: 2026-05-09
-pillars: "journal"
+trails: "journal"
 tags: ["superbooth", "berlin", "field-notes"]
 summary: "Three days at FEZ Berlin among synth makers. What I learned, what I bought, what I watched other people fall in love with."
 ---

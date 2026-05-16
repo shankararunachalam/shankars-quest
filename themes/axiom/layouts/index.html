@@ -14,22 +14,24 @@
   {{- end }}
 </section>
 
-{{- with .Site.Params.pillars }}
-<section class="pillars-grid">
+{{- with .Site.Params.trails }}
+<section class="trails-grid site-narrow">
   {{- range . -}}
     {{- $slug := .slug -}}
-    {{- $posts := where site.RegularPages "Params.pillars" $slug -}}
+    {{- $posts := where site.RegularPages "Params.trails" $slug -}}
     {{- $has := gt (len $posts) 0 -}}
-    {{- $url := printf "/pillars/%s/" $slug | relURL -}}
-    <a class="pillar-card" data-pillar="{{ $slug }}"{{ if $has }} href="{{ $url }}"{{ end }}>
-      <h2 class="pillar-card-title">{{ .name }}</h2>
-      <p class="pillar-card-description">{{ .description }}</p>
-      {{- with index ($posts.ByDate.Reverse) 0 -}}
-      <div class="pillar-card-latest">
+    {{- $url := printf "/trails/%s/" $slug | relURL -}}
+    <a class="trail-card" data-trail="{{ $slug }}"{{ if $has }} href="{{ $url }}"{{ end }}>
+      <h2 class="trail-card-title">{{ .name }}</h2>
+      <p class="trail-card-description">{{ .description }}</p>
+      <div class="trail-card-latest">
         <span class="label">Latest</span>
-        {{ .Title }} · <em>{{ .Date.Format "Jan 2006" }}</em>
+        {{- with index ($posts.ByDate.Reverse) 0 }}
+        <span class="latest-line">{{ .Title }} · <em>{{ .Date.Format "Jan 2006" }}</em></span>
+        {{- else }}
+        <span class="latest-empty">—</span>
+        {{- end }}
       </div>
-      {{- end -}}
     </a>
   {{- end -}}
 </section>

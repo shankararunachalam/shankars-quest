@@ -1,5 +1,4 @@
 ---
-title: "Hello"
 ---
 
 I'm Shankar — a creator working across three threads: a Carnatic compositional instrument I'm building on Monome hardware, a long-running RPG engine project, and a parallel run through the foundations of modern machine learning.

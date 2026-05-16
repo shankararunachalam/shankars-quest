@@ -3,23 +3,23 @@
 > *quiet editorial typography for a working journal*
 
 A minimal Hugo theme for personal blogs that span several project threads at
-once. Each post belongs to a **pillar**; the theme keeps the pillars visually
+once. Each post belongs to a **trail**; the theme keeps the trails visually
 distinct without ever letting the design fragment. The whole identity budget
-per pillar is two things: an accent colour and a section break.
+per trail is two things: an accent colour and a section break.
 
 ## What makes it distinctive
 
-- **Pillar-adaptive section breaks** via the `{{< break >}}` shortcode. The
-  break renders in a glyph vocabulary chosen by the post's pillar — Carnatic
-  tala notation for music, roguelike map glyphs for games, a small computation
+- **Trail-adaptive section breaks** via the `{{< break >}}` shortcode. The
+  break renders in a glyph vocabulary chosen by the post's trail — Carnatic
+  tala notation for music, roguelike map glyphs for gaming, a small computation
   graph for LLM posts, a bare dot rhythm for the journal. One device, four
   dialects.
-- **Per-pillar accent colour.** Links, focus rings, underlines and the like
-  pick up the hue of the page's pillar. A music post reads in indigo, a games
-  post in cyan, an LLM post in wine; pages with no pillar stay neutral grey.
-  Set once, in CSS, via a `data-pillar` attribute on `<body>`.
-- **Multi-pillar post structure.** Posts group by pillar; each pillar gets an
-  archive page and a homepage card, and the homepage surfaces the pillars
+- **Per-trail accent colour.** Links, focus rings, underlines and the like
+  pick up the hue of the page's trail. A music post reads in indigo, a gaming
+  post in cyan, an LLM post in wine; pages with no trail stay neutral grey.
+  Set once, in CSS, via a `data-trail` attribute on `<body>`.
+- **Multi-trail post structure.** Posts group by trail; each trail gets an
+  archive page and a homepage card, and the homepage surfaces the trails
   side-by-side as equal peers.
 - **Editorial typography.** Fraunces (display, with variable optical-sizing
   and the SOFT/WONK axes), EB Garamond (body), JetBrains Mono (code).
@@ -48,7 +48,7 @@ Then copy the example site config to use as a starting point:
 
 ```bash
 cp themes/axiom/exampleSite/hugo.toml ./hugo.toml
-# customize: title, baseURL, author, pillars
+# customize: title, baseURL, author, trails
 ```
 
 ## Required configuration
@@ -63,18 +63,18 @@ the canonical example. Minimal:
   tagline = "a quiet subtitle"
   currently = "What you're working on right now (shown on the home page)"
 
-  # At least one pillar
-  [[params.pillars]]
-    slug = "music"          # must match the `pillars` field in post front matter
+  # At least one trail
+  [[params.trails]]
+    slug = "music"          # must match the `trails` field in post front matter
     name = "Music"          # display name
     description = "Brief description of this thread"
 ```
 
-Taxonomies must be configured for pillars to work as filterable categories:
+Taxonomies must be configured for trails to work as filterable categories:
 
 ```toml
 [taxonomies]
-  pillar = "pillars"
+  trail = "trails"
   tag = "tags"
 ```
 
@@ -107,7 +107,7 @@ Front matter:
 ---
 title: "Post title"
 date: 2026-05-12
-pillars: "music"           # music | games | llm | journal — must match a pillar slug
+trails: "music"           # music | gaming | llm | journal — must match a trail slug
 tags: ["norns", "carnatic"]
 summary: "Optional short description (also used as og:description)"
 ---
@@ -125,8 +125,8 @@ First section text.
 Next section text.
 ```
 
-`{{< break >}}` is **pillar-adaptive**: with no argument it renders the
-default vocabulary for the post's pillar. The same call produces a tala on a
+`{{< break >}}` is **trail-adaptive**: with no argument it renders the
+default vocabulary for the post's trail. The same call produces a tala on a
 music post and a computation graph on an LLM post. Hovering the break shows
 the variant's name via the native `title` attribute.
 
@@ -135,21 +135,21 @@ To pick a specific variant, pass its name:
 ```markdown
 {{< break "rupaka" >}}    <!-- a named music variant -->
 {{< break "backward" >}}  <!-- the backward pass, an llm variant -->
-{{< break "lair" >}}      <!-- a games variant -->
+{{< break "lair" >}}      <!-- a gaming variant -->
 ```
 
-An unknown variant falls back to the pillar's default; a post with no pillar
+An unknown variant falls back to the trail's default; a post with no trail
 falls back to the neutral journal break.
 
-### The pillar shortcode
+### The trail shortcode
 
-Inline reference to a pillar within prose:
+Inline reference to a trail within prose:
 
 ```markdown
-This connects to my {{< pillar "music" >}} work on Norns.
+This connects to my {{< trail "music" >}} work on Norns.
 ```
 
-Renders as a small chip linked to the pillar's archive page.
+Renders as a small chip linked to the trail's archive page.
 
 ## Customizing
 
@@ -161,21 +161,21 @@ CSS variables throughout — you change the tokens, not the rules.
 - **Ground / ink / rule** — the neutral surfaces and text. Light and dark
   values are defined in the `:root`, `@media (prefers-color-scheme: dark)`
   and `:root[data-theme="…"]` blocks.
-- **Pillar accents** — `--pillar-music`, `--pillar-games`, `--pillar-llm`,
-  `--pillar-journal`. These are the only hues in the palette.
+- **Trail accents** — `--trail-music`, `--trail-gaming`, `--trail-llm`,
+  `--trail-journal`. These are the only hues in the palette.
 - **`--accent`** is *contextual*: it defaults to the neutral journal hue and
-  is reassigned per page by the `[data-pillar="…"]` rules. `--accent-soft`
+  is reassigned per page by the `[data-trail="…"]` rules. `--accent-soft`
   and `--accent-faint` are derived from it with `color-mix()`, so they follow
-  whichever pillar and colour mode are in scope automatically.
+  whichever trail and colour mode are in scope automatically.
 
-To add a pillar, add a `--pillar-<slug>` variable (light and dark) and a
-matching `[data-pillar="<slug>"]` rule.
+To add a trail, add a `--trail-<slug>` variable (light and dark) and a
+matching `[data-trail="<slug>"]` rule.
 
 ### Section break vocabularies
 
 The break glyphs live in `data/breaks.yaml`, not in template code. The
-shape is `breaks[pillar].variants[variant]`, each variant carrying `glyphs`
-and a `label`. Add a tala, a map archetype or a whole new pillar's vocabulary
+shape is `breaks[trail].variants[variant]`, each variant carrying `glyphs`
+and a `label`. Add a tala, a map archetype or a whole new trail's vocabulary
 by editing that file — no template changes needed.
 
 ### Typography
@@ -198,8 +198,8 @@ MIT. Use it, modify it, ship something with it.
 
 ## Acknowledgements
 
-The music pillar's section break uses standard South Indian tala notation —
+The music trail's section break uses standard South Indian tala notation —
 the `X · | O` symbols documented in Trichy Sankaran's *The Rhythmic
-Principles & Practice of South Indian Drumming* (1994). The other pillars'
+Principles & Practice of South Indian Drumming* (1994). The other trails'
 vocabularies (roguelike map glyphs, computation graphs) are drawn from their
 own domains in the same spirit: notation borrowed, not invented.

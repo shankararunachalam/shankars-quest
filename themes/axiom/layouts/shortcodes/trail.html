@@ -1,0 +1,9 @@
+{{- /*
+  Inline trail reference for use within prose.
+  Usage: {{< trail "music" >}}
+*/ -}}
+{{- $trail := .Get 0 -}}
+{{- if $trail -}}
+  {{- $slug := $trail | urlize -}}
+  <a href="{{ printf "/trails/%s/" $slug | relURL }}" class="trail-chip trail-{{ $slug }}">{{ $trail }}</a>
+{{- end -}}

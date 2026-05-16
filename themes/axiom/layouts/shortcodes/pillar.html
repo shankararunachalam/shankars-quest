@@ -1,9 +1,0 @@
-{{- /*
-  Inline pillar reference for use within prose.
-  Usage: {{< pillar "music" >}}
-*/ -}}
-{{- $pillar := .Get 0 -}}
-{{- if $pillar -}}
-  {{- $slug := $pillar | urlize -}}
-  <a href="{{ printf "/pillars/%s/" $slug | relURL }}" class="pillar-chip pillar-{{ $slug }}">{{ $pillar }}</a>
-{{- end -}}

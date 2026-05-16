@@ -3,8 +3,8 @@
   <header class="post-header">
     <div class="post-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-      {{- with .Params.pillars }}
-        {{ partial "pillar-chip.html" (dict "pillar" . "ctx" $) }}
+      {{- with .Params.trails }}
+        {{ partial "trail-chip.html" (dict "trail" . "ctx" $) }}
       {{- end }}
       <span class="reading-time">{{ .ReadingTime }} min read</span>
     </div>

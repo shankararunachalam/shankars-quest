@@ -1,20 +1,20 @@
 {{- /*
-  break.html — the axiom theme's pillar-adaptive section break.
+  break.html — the axiom theme's trail-adaptive section break.
 
   Resolves a two-level lookup against data/breaks.yaml:
-    pillar  - the post's `pillar` front-matter field;
+    trail   - the post's `trails` front-matter field;
               falls back to "journal" when unset or unknown.
     variant - the optional first argument;
-              falls back to the pillar's default when omitted,
+              falls back to the trail's default when omitted,
               and when an unknown variant is passed.
 
   Call it as:
-    break              -> the pillar's default variant
+    break              -> the trail's default variant
     break "rupaka"     -> a named variant
 */ -}}
 {{- $breaks := site.Data.breaks -}}
-{{- $pillar := .Page.Params.pillars | default "journal" -}}
-{{- $family := index $breaks $pillar -}}
+{{- $trail := .Page.Params.trails | default "journal" -}}
+{{- $family := index $breaks $trail -}}
 {{- if not $family -}}
   {{- $family = index $breaks "journal" -}}
 {{- end -}}

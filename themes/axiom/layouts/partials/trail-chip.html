@@ -1,0 +1,11 @@
+{{- /*
+  Renders a trail chip linking to the trail page.
+  Usage: {{ partial "trail-chip.html" (dict "trail" .Params.trails "ctx" .) }}
+*/ -}}
+{{- $trail := .trail -}}
+{{- $ctx := .ctx -}}
+{{- if $trail -}}
+  {{- $slug := $trail | urlize -}}
+  {{- $url := printf "/trails/%s/" $slug | relURL -}}
+  <a href="{{ $url }}" class="trail-chip trail-{{ $slug }}">{{ $trail }}</a>
+{{- end -}}

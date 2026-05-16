@@ -1,6 +1,6 @@
 # Shankar's Quest — blog
 
-A published working journal spanning three project threads ("pillars"):
+A published working journal spanning three project threads ("trails"):
 Carnatic music, an RPG game engine, and LLM foundations. Honest progress
 notes, not a how-to or a portfolio. Live at https://shankars.quest.
 
@@ -29,20 +29,20 @@ GitHub Actions → GitHub Pages.
 ## Writing posts
 
 - A post is a Markdown file in `content/posts/`. Front matter fields:
-  - `pillars:` — one of `music | games | llm | journal`. Note the plural
-    key: it is the taxonomy field. Singular `pillar:` will NOT work.
+  - `trails:` — one of `music | gaming | llm | journal`. Note the plural
+    key: it is the taxonomy field. Singular `trail:` will NOT work.
   - `title`, `date`, `tags`, `summary`; `draft: true` until ready.
-- One pillar per post.
+- One trail per post.
 - For a section break, use the `{{< break >}}` shortcode. It adapts to the
-  post's pillar automatically; an optional argument picks a variant.
+  post's trail automatically; an optional argument picks a variant.
 
 ## Theme conventions — do not break these
 
 - `axiom` is deliberately minimal: one CSS file, no JS framework, no build
   step beyond Hugo. Keep it that way.
-- A pillar's whole identity budget is two things — its accent colour and
-  its section break. Do not add per-pillar fonts, layouts, or navigation.
-- Palette: a neutral base plus four accents — music indigo, games cyan,
+- A trail's whole identity budget is two things — its accent colour and
+  its section break. Do not add per-trail fonts, layouts, or navigation.
+- Palette: a neutral base plus four accents — music indigo, gaming cyan,
   llm wine, journal grey — each with a light and a dark value.
 - Section-break glyph vocabularies live in `themes/axiom/data/breaks.yaml`.
 - `hugo.toml` must keep `[markup.highlight] noClasses = false`, so syntax
