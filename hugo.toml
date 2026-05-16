@@ -45,9 +45,9 @@ theme = "axiom"
   # The "currently" line on the homepage — keep this updated
   currently = "Bringing a Carnatic compositional instrument up on Norns hardware, sketching the core loop of an RPG engine, and working through the foundations of neural networks — roughly in order of momentum."
 
-  # Privacy-light analytics (optional) — emits nothing unless set.
-  # Sign up at goatcounter.com, then use the full count endpoint:
-  # goatcounter = "https://yourcode.goatcounter.com/count"
+  # Privacy-light analytics. GoatCounter free tier — no cookies, no
+  # personal data, no consent banner required.
+  goatcounter = "https://shankar.goatcounter.com/count"
 
   # Trail definitions — these become the cards on the homepage
   # The `slug` here must match the `trails` field in your post front matter
