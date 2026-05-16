@@ -193,22 +193,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--scale-4);
+  font-size: var(--scale-3);
   line-height: var(--leading-tight);
-  font-variation-settings: "opsz" 48;
+  font-variation-settings: "opsz" 36;
   margin-top: 0;
 }
 
 h2 {
-  font-size: var(--scale-3);
-  font-variation-settings: "opsz" 36;
+  font-size: var(--scale-2);
+  font-variation-settings: "opsz" 24;
 }
 
 h3 {
-  font-size: var(--scale-2);
+  font-size: var(--scale-1);
   font-style: italic;
   color: var(--ink-soft);
-  font-variation-settings: "opsz" 24;
+  font-variation-settings: "opsz" 18;
 }
 
 h4 {
@@ -223,19 +223,6 @@ p {
   margin: 0 0 var(--akshara);
   hyphens: auto;
   -webkit-hyphens: auto;
-}
-
-p + p {
-  text-indent: 1.5em;
-  margin-top: calc(var(--akshara) * -0.5);
-}
-
-/* but no indent right after a heading or block element */
-h1 + p, h2 + p, h3 + p, h4 + p,
-blockquote + p, ul + p, ol + p, pre + p, hr + p,
-.section-break + p, .first-paragraph + p {
-  text-indent: 0;
-  margin-top: 0;
 }
 
 /* lead-style paragraph — applied manually with class="lead"; no longer
@@ -563,12 +550,6 @@ th {
   padding: calc(var(--akshara) * 1.5) 0 0;
 }
 
-.home-intro h1 {
-  font-size: var(--scale-4);
-  margin-bottom: var(--akshara);
-  font-variation-settings: "opsz" 60;
-}
-
 .home-intro .lead {
   font-size: var(--scale-1);
   color: var(--ink-soft);
@@ -617,10 +598,11 @@ th {
   color: inherit;
   transition: border-color var(--tx-med), transform var(--tx-med);
   /* flex column so .trail-card-latest's margin-top:auto pins it to the
-     bottom; min-height keeps cards consistent across the 2x2 grid. */
+     bottom; min-height keeps cards consistent across the 2x2 grid.
+     Sized for descriptions of up to ~5 lines (margin given for a 6th). */
   display: flex;
   flex-direction: column;
-  min-height: calc(var(--akshara) * 7);
+  min-height: calc(var(--akshara) * 11);
   position: relative;
   overflow: hidden;
 }
@@ -706,17 +688,10 @@ th {
 /* ---------- post list ---------- */
 
 /* listing pages — /posts/, /trails/, /trails/<name>/, /tags/, /tags/<name>/.
-   Provides the page-top breathing room that single posts get from .post,
-   and tones the H1 down a step (scale-3 vs scale-4) so the page title
-   doesn't dwarf the list items below it. */
+   Page-top breathing room that single posts get from .post. */
 .listing {
   padding-top: calc(var(--akshara) * 1.5);
   padding-bottom: calc(var(--akshara) * 2);
-}
-
-.listing .post-title {
-  font-size: var(--scale-3);
-  font-variation-settings: "opsz" 36;
 }
 
 .section-heading {
@@ -840,8 +815,7 @@ th {
 }
 
 .post-title {
-  font-size: var(--scale-4);
-  font-variation-settings: "opsz" 60;
+  /* size + opsz come from the base h1 rule (now scale-3). */
   margin: 0 0 var(--akshara);
 }
 
@@ -986,8 +960,8 @@ th {
 }
 
 .error-page h1 {
-  font-size: var(--scale-5);
-  font-variation-settings: "opsz" 60;
+  font-size: var(--scale-4);
+  font-variation-settings: "opsz" 48;
   margin-bottom: var(--akshara);
 }
 
@@ -1013,9 +987,6 @@ th {
     text-align: left;
   }
 
-  .post-title {
-    font-size: var(--scale-3);
-  }
 }
 
 /* ---------- print ---------- */
