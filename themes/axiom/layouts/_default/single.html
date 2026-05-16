@@ -1,6 +1,7 @@
 {{ define "main" }}
 <article class="post site-narrow">
   <header class="post-header">
+    {{- if eq .Section "posts" }}
     <div class="post-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
       {{- with .Params.trails }}
@@ -8,6 +9,7 @@
       {{- end }}
       <span class="reading-time">{{ .ReadingTime }} min read</span>
     </div>
+    {{- end }}
     <h1 class="post-title">{{ .Title }}</h1>
     {{- with .Params.summary }}
     <p class="post-summary">{{ . }}</p>

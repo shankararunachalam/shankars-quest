@@ -77,7 +77,7 @@
   :root {
     --bg: #191816;
     --bg-elevated: #232220;
-    --ink: #e9e7e1;
+    --ink: #d4d1c8;
     --ink-soft: #a5a39a;
     --ink-faint: #7b7970;
     --rule: #34332f;
@@ -101,7 +101,7 @@
 :root[data-theme="dark"] {
   --bg: #191816;
   --bg-elevated: #232220;
-  --ink: #e9e7e1;
+  --ink: #d4d1c8;
   --ink-soft: #a5a39a;
   --ink-faint: #7b7970;
   --rule: #34332f;
@@ -238,8 +238,9 @@ blockquote + p, ul + p, ol + p, pre + p, hr + p,
   margin-top: 0;
 }
 
-/* lead-style first paragraph */
-.lead, .post-content > p:first-of-type {
+/* lead-style paragraph — applied manually with class="lead"; no longer
+   auto-applied to the first paragraph (summary already plays that role). */
+.lead {
   font-size: var(--scale-1);
   color: var(--ink-soft);
   text-indent: 0;
@@ -483,7 +484,7 @@ th {
 
 .section-break {
   position: relative;
-  margin: var(--avartana) 0;
+  margin: calc(var(--akshara) * 2) 0;
   text-align: center;
   font-family: var(--mono);
   font-size: 0.9rem;
@@ -789,11 +790,15 @@ th {
 /* ---------- single post ---------- */
 
 .post {
-  padding: var(--avartana) 0;
+  /* matches home-intro padding-top so the gap from the masthead to the
+     first content is consistent across all page types. */
+  padding: calc(var(--akshara) * 1.5) 0 calc(var(--akshara) * 2);
 }
 
 .post-header {
-  margin-bottom: var(--avartana);
+  /* one section gap (2*akshara) to the body; .post-content's margin-top
+     is set to 0 so this lone value owns the spacing. */
+  margin-bottom: calc(var(--akshara) * 2);
   text-align: left;
 }
 
@@ -805,7 +810,8 @@ th {
   font-style: italic;
   font-size: 0.9rem;
   color: var(--ink-faint);
-  margin-bottom: var(--akshara);
+  /* meta and title belong together; keep them tight. */
+  margin-bottom: calc(var(--akshara) * 0.5);
   flex-wrap: wrap;
 }
 
@@ -835,7 +841,8 @@ th {
 }
 
 .post-content {
-  margin-top: var(--avartana);
+  /* spacing is owned by .post-header's margin-bottom. */
+  margin-top: 0;
 }
 
 .post-content > *:first-child {
@@ -843,7 +850,7 @@ th {
 }
 
 .post-footer {
-  margin-top: calc(var(--avartana) * 1.5);
+  margin-top: calc(var(--akshara) * 2);
   padding-top: var(--akshara);
   border-top: 1px solid var(--rule);
   display: flex;
@@ -872,7 +879,7 @@ th {
 }
 
 .post-nav {
-  margin-top: var(--avartana);
+  margin-top: calc(var(--akshara) * 2);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--akshara);
